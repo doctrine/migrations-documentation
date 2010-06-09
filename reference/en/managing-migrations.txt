@@ -24,8 +24,7 @@ As you can see we have a new version present and it is ready to be executed. The
 problem is it does not have anything in it so nothing would be executed! Let's
 add some code to it and add a new table:
 
-    <?php
-
+    [php]
     namespace DoctrineMigrations;
 
     use Doctrine\DBAL\Migrations\AbstractMigration,

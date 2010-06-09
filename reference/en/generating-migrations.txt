@@ -16,8 +16,7 @@ and add a new column:
 
 Be sure that you add the property to the `Entities/User.php` file:
 
-    <?php
-
+    [php]
     namespace Entities;
 
     /** @Entity @Table(name="users") */
@@ -40,25 +39,24 @@ changes required to update your database!
 The migration class that is generated contains the SQL statements required to 
 update your database:
 
-    <?php
+    [php]
+    namespace DoctrineMigrations;
 
-     namespace DoctrineMigrations;
+    use Doctrine\DBAL\Migrations\AbstractMigration,
+        Doctrine\DBAL\Schema\Schema;
 
-     use Doctrine\DBAL\Migrations\AbstractMigration,
-         Doctrine\DBAL\Schema\Schema;
+    class Version20100416130459 extends AbstractMigration
+    {
+        public function up(Schema $schema)
+        {
+            $this->_addSql('ALTER TABLE users ADD test VARCHAR(255) NOT NULL');
+        }
 
-     class Version20100416130459 extends AbstractMigration
-     {
-         public function up(Schema $schema)
-         {
-             $this->_addSql('ALTER TABLE users ADD test VARCHAR(255) NOT NULL');
-         }
-
-         public function down(Schema $schema)
-         {
-             $this->_addSql('ALTER TABLE users DROP test');
-         }
-     }
+        public function down(Schema $schema)
+        {
+            $this->_addSql('ALTER TABLE users DROP test');
+        }
+    }
 
 The SQL generated here is the exact same SQL that would be executed if you were
 using the `orm:schema-tool` task and the `--update` option. This just allows you to

@@ -10,7 +10,7 @@ First setup the class loader to load the classes for the `Doctrine\DBAL\Migratio
 namespace in your project:
 
     [php]
-    require_once '/path/to/migrations/lib/vendor/doctrine-common/Doctrine/Common/ClassLoader;
+    require_once '/path/to/migrations/lib/vendor/doctrine-common/Doctrine/Common/ClassLoader';
 
     use Doctrine\Common\ClassLoader;
 
@@ -23,6 +23,7 @@ Now the above autoloader is able to load a class like the following:
 
 Along with this we will need to be able to autoload our actual migration classes:
 
+    [php]
     $classLoader = new ClassLoader('DoctrineMigrations', '/path/to/migrations/classes');
     $classLoader->register();
 
@@ -34,6 +35,9 @@ This autoloader is able to load classes like the following:
 
 Now that we have setup the autoloaders we are ready to add the migration console
 commands to our Doctrine Command Line Interface:
+
+    [php]
+    // ...
 
     $cli->addCommands(array(
         // ...

@@ -8,8 +8,7 @@ following command:
 Have a look and you will see a new class at the above location that looks like
 the following:
 
-    <?php
-
+    [php]
     namespace DoctrineMigrations;
 
     use Doctrine\DBAL\Migrations\AbstractMigration,
@@ -40,8 +39,7 @@ First you need to generate a new migration class:
 This newly generated migration class is the place where you can add your own
 custom SQL queries:
 
-    <?php
-
+    [php]
     namespace DoctrineMigrations;
 
     use Doctrine\DBAL\Migrations\AbstractMigration,
