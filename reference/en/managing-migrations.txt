@@ -53,7 +53,7 @@ it produces the SQL we expect:
     y
     Executing dry run of migration up to 20100416130452 from 0
 
-      ++ migrating 20100416130452
+      >> migrating 20100416130452
 
          -> CREATE TABLE users (username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL) ENGINE = InnoDB
 
@@ -65,11 +65,11 @@ the migration:
     y
     Migrating up to 20100416130452 from 0
 
-      ++ migrating 20100416130452
+      >> migrating 20100416130452
 
          -> CREATE TABLE users (username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL) ENGINE = InnoDB
 
-      ++ migrated
+      >> migrated
 
 By checking the status again you will see everything is updated:
 
@@ -149,11 +149,11 @@ _--write-sql_ option of the _migrate_ command:
     $ ./doctrine migrations:migrate --write-sql
     Executing dry run of migration up to 20100416130422 from 0
 
-      ++ migrating 20100416130401
+      >> migrating 20100416130401
 
          -> CREATE TABLE users (username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL) ENGINE = InnoDB
 
-      ++ migrating 20100416130422
+      >> migrating 20100416130422
 
          -> CREATE TABLE addresses (id INT NOT NULL, street VARCHAR(255) NOT NULL, PRIMARY KEY(id)) ENGINE = InnoDB
 
@@ -162,6 +162,7 @@ _--write-sql_ option of the _migrate_ command:
 Now if you have a look at the _doctrine_migration_20100416130405.sql_ file you will see the would be
 executed SQL outputted in a nice format:
 
+    [sql]
     # Doctrine Migration File Generated on 2010-04-16 13:04:05
     # Migrating from 0 to 20100416130422
 
