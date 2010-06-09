@@ -1,0 +1,113 @@
+The Doctrine Migrations offer additional functionality on top of the database
+abstraction layer (DBAL) for versioning your database schema and easily deploying
+changes to it. It is a very easy to use and powerful tool.
+
+In order to use migrations you need to do some setup first.
+
+++ Class Loaders
+
+First setup the class loader to load the classes for the `Doctrine\DBAL\Migrations`
+namespace in your project:
+
+    [php]
+    require_once '/path/to/migrations/lib/vendor/doctrine-common/Doctrine/Common/ClassLoader;
+
+    use Doctrine\Common\ClassLoader;
+
+    $classLoader = new ClassLoader('Doctrine\DBAL\Migrations', '/path/to/migrations/lib');
+    $classLoader->register();
+
+Now the above autoloader is able to load a class like the following:
+
+    /path/to/migrations/lib/Doctrine/DBAL/Migrations/Migrations/Migration.php
+
+Along with this we will need to be able to autoload our actual migration classes:
+
+    $classLoader = new ClassLoader('DoctrineMigrations', '/path/to/migrations/classes');
+    $classLoader->register();
+
+This autoloader is able to load classes like the following:
+
+    /path/to/migrations/classes/DoctrineMigrations/VersionYYYYMMDDHHMMSS.php
+
+++ Console Commands
+
+Now that we have setup the autoloaders we are ready to add the migration console
+commands to our Doctrine Command Line Interface:
+
+    $cli->addCommands(array(
+        // ...
+
+        // Migrations Commands
+        new \Doctrine\DBAL\Migrations\Tools\Console\Command\DiffCommand(),
+        new \Doctrine\DBAL\Migrations\Tools\Console\Command\ExecuteCommand(),
+        new \Doctrine\DBAL\Migrations\Tools\Console\Command\GenerateCommand(),
+        new \Doctrine\DBAL\Migrations\Tools\Console\Command\MigrateCommand(),
+        new \Doctrine\DBAL\Migrations\Tools\Console\Command\StatusCommand(),
+        new \Doctrine\DBAL\Migrations\Tools\Console\Command\VersionCommand()
+    ));
+
+You will see that you have a few new commands when you execute the following command:
+
+    $ ./doctrine list migrations
+    Doctrine Command Line Interface version 2.0.0BETA3-DEV
+
+    Usage:
+      [options] command [arguments]
+
+    Options:
+      --help           -h Display this help message.
+      --quiet          -q Do not output any message.
+      --verbose        -v Increase verbosity of messages.
+      --version        -V Display this program version.
+      --color          -c Force ANSI color output.
+      --no-interaction -n Do not ask any interactive question.
+
+    Available commands for the "migrations" namespace:
+      :diff      Generate a migration by comparing your current database to your mapping information.
+      :execute   Execute a single migration version up or down manually.
+      :generate  Generate a blank migration class.
+      :migrate   Execute a migration to a specified version or the latest available version.
+      :status    View the status of a set of migrations.
+      :version   Manually add and delete migration versions from the version table.
+
+++ Configuration
+
+The last thing you need to do is to configure your migrations. You can do so
+by using the _--configuration_ option to manually specify the path
+to a configuration file. If you don't specify any configuration file the tasks will
+look for a file named _migrations.xml_ or _migrations.yml_ at the root of
+your command line. For the upcoming examples you can use a _migrations.xml_
+file like the following:
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <doctrine-migrations xmlns="http://doctrine-project.org/schemas/migrations/configuration"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://doctrine-project.org/schemas/migrations/configuration
+                        http://doctrine-project.org/schemas/migrations/configuration.xsd">
+
+        <name>Doctrine Sandbox Migrations</name>
+
+        <migrations-namespace>DoctrineMigrations</migrations-namespace>
+
+        <table name="doctrine_migration_versions" />
+
+        <migrations-directory>/path/to/migrations/classes/DoctrineMigrations</migrations-directory>
+
+    </doctrine-migrations>
+
+Of course you could do the same thing with a _configuration.yml_ file:
+
+    name: Doctrine Sandbox Migrations
+    migrations_namespace: DoctrineMigrations
+    table_name: doctrine_migration_versions
+    migrations_directory: /path/to/migrations/classes/DoctrineMigrations
+
+And if you want to specify each migration manually in YAML you can:
+
+    table_name: doctrine_migration_versions
+    migrations_directory: /path/to/migrations/classes/DoctrineMigrations
+    migrations:
+      migration1:
+        version: 1
+        class: DoctrineMigrations\NewMigration
