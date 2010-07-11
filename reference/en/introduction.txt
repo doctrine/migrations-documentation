@@ -4,9 +4,18 @@ changes to it. It is a very easy to use and powerful tool.
 
 In order to use migrations you need to do some setup first.
 
-++ Class Loaders
+++ Installation
 
-First setup the class loader to load the classes for the `Doctrine\DBAL\Migrations`
+There are two ways to use the Doctrine Migrations project. Either as a supplement
+to your already existing Doctrine DBAL (+ ORM) setup or as a standalone "PHP Binary"
+(also known as PHAR).
+
++++ Use as Supplement
+
+To use the Migrations as supplement you have to get the sources from the GitHub
+repository, either by downloading them, checking them out as SVN external or as Git Submodule.
+
+Then you have to setup the class loader to load the classes for the `Doctrine\DBAL\Migrations`
 namespace in your project:
 
     [php]
@@ -21,17 +30,7 @@ Now the above autoloader is able to load a class like the following:
 
     /path/to/migrations/lib/Doctrine/DBAL/Migrations/Migrations/Migration.php
 
-Along with this we will need to be able to autoload our actual migration classes:
-
-    [php]
-    $classLoader = new ClassLoader('DoctrineMigrations', '/path/to/migrations/classes');
-    $classLoader->register();
-
-This autoloader is able to load classes like the following:
-
-    /path/to/migrations/classes/DoctrineMigrations/VersionYYYYMMDDHHMMSS.php
-
-++ Console Commands
++++ Register Console Commands
 
 Now that we have setup the autoloaders we are ready to add the migration console
 commands to our Doctrine Command Line Interface:
@@ -49,6 +48,20 @@ commands to our Doctrine Command Line Interface:
         new \Doctrine\DBAL\Migrations\Tools\Console\Command\MigrateCommand(),
         new \Doctrine\DBAL\Migrations\Tools\Console\Command\StatusCommand(),
         new \Doctrine\DBAL\Migrations\Tools\Console\Command\VersionCommand()
+    ));
+
+Additionally you have to make sure the 'db' and 'dialog' Helpers are added to your Symfony
+Console HelperSet.
+
+    [php]
+    $db = \Doctrine\DBAL\DriverManager::getConnection($params);
+    // or
+    $em = \Doctrine\ORM\EntityManager::create($params);
+    $db = $em->getConnection();
+
+    $helperSet = new \Symfony\Components\Console\Helper\HelperSet(array(
+        'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($db),
+        'dialog' => new \Symfony\Components\Console\Helper\DialogHelper(),
     ));
 
 You will see that you have a few new commands when you execute the following command:
@@ -74,6 +87,30 @@ You will see that you have a few new commands when you execute the following com
       :migrate   Execute a migration to a specified version or the latest available version.
       :status    View the status of a set of migrations.
       :version   Manually add and delete migration versions from the version table.
+
++++ PHP Binary / PHAR
+
+You can download the Migrations PHP Binary, which is a standalone PHAR package
+file with all the required dependencies. You can drop that single file onto any server
+and start using the Doctrine Migrations.
+
+To register a system command for the migrations you can create a simple batch
+script, for example on a *nix Enviroment creating a `/usr/local/bin/doctrine-migrations`:
+
+    #!/bin/sh
+    php /path/to/doctrine-migrations.phar "$@"
+
+You could now go and use the migrations like:
+
+    [shell]
+    myshell> doctrine-migrations
+
+Because the PHAR file is standalone it does not rely on the Symfony Console 'db' Helper,
+but you have to pass a `--db-configuration` parameter that points to a PHP file
+which returns the parameters for `Doctrine\DBAL\DriverManager::getConnection($dbParams)`.
+If you don't specify this option Doctrine Migrations will look for a `migrations-db.php`
+file returning that parameters in your current directory and only throw an error if
+that is not found.
 
 ++ Configuration
 
@@ -113,5 +150,9 @@ And if you want to specify each migration manually in YAML you can:
     migrations_directory: /path/to/migrations/classes/DoctrineMigrations
     migrations:
       migration1:
-        version: 1
+        version: 20100704000000
         class: DoctrineMigrations\NewMigration
+
+If you specify your own migration classes (like `DoctrineMigrations\NewMigration` in the previous
+example) you will need an autoloader unless all those classes begin with the prefix Version*,
+for example path/to/migrations/classes/VersionNewMigration.php.

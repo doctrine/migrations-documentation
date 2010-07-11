@@ -6,6 +6,8 @@ if it is there:
      == Configuration
 
         >> Name:                                               Doctrine Sandbox Migrations
+        >> Database Driver:                                    pdo_mysql
+        >> Database Name:                                      testdb
         >> Configuration Source:                               /Users/jwage/Sites/doctrine2git/tools/sandbox/migrations.xml
         >> Version Table Name:                                 doctrine_migration_versions
         >> Migrations Namespace:                               DoctrineMigrations
@@ -78,6 +80,8 @@ By checking the status again you will see everything is updated:
      == Configuration
 
         >> Name:                                               Doctrine Sandbox Migrations
+        >> Database Driver:                                    pdo_mysql
+        >> Database Name:                                      testdb
         >> Configuration Source:                               /Users/jwage/Sites/doctrine2git/tools/sandbox/migrations.xml
         >> Version Table Name:                                 doctrine_migration_versions
         >> Migrations Namespace:                               DoctrineMigrations
@@ -125,6 +129,8 @@ the status command:
      == Configuration
 
         >> Name:                                               Doctrine Sandbox Migrations
+        >> Database Driver:                                    pdo_mysql
+        >> Database Name:                                      testdb
         >> Configuration Source:                               /Users/jwage/Sites/doctrine2git/tools/sandbox/migrations.xml
         >> Version Table Name:                                 doctrine_migration_versions
         >> Migrations Namespace:                               DoctrineMigrations
