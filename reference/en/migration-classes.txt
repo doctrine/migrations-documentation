@@ -49,11 +49,11 @@ custom SQL queries:
     {
         public function up(Schema $schema)
         {
-            $this->_addSql('CREATE TABLE addresses (id INT NOT NULL, street VARCHAR(255) NOT NULL, PRIMARY KEY(id)) ENGINE = InnoDB');
+            $this->addSql('CREATE TABLE addresses (id INT NOT NULL, street VARCHAR(255) NOT NULL, PRIMARY KEY(id)) ENGINE = InnoDB');
         }
 
         public function down(Schema $schema)
         {
-            $this->_addSql('DROP TABLE addresses');
+            $this->addSql('DROP TABLE addresses');
         }
     }

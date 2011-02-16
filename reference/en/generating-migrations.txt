@@ -49,12 +49,12 @@ update your database:
     {
         public function up(Schema $schema)
         {
-            $this->_addSql('ALTER TABLE users ADD test VARCHAR(255) NOT NULL');
+            $this->addSql('ALTER TABLE users ADD test VARCHAR(255) NOT NULL');
         }
 
         public function down(Schema $schema)
         {
-            $this->_addSql('ALTER TABLE users DROP test');
+            $this->addSql('ALTER TABLE users DROP test');
         }
     }
 
