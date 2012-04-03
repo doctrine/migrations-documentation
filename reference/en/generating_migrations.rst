@@ -1,9 +1,17 @@
+.. index::
+   single: GeneratingMigrations
+
+Generating Migrations
+=====================
+
 If you are using the Doctrine 2 ORM you can easily generate a migration class
 by modifying your mapping information and running the diff task to compare it
 to your current database schema.
 
 If you are using the sandbox you can modify the provided `yaml/Entities.User.dcm.yml`
 and add a new column:
+
+.. code-block:: yaml
 
     Entities\User:
       # ...
@@ -16,7 +24,8 @@ and add a new column:
 
 Be sure that you add the property to the `Entities/User.php` file:
 
-    [php]
+.. code-block:: php
+
     namespace Entities;
 
     /** @Entity @Table(name="users") */
@@ -33,13 +42,16 @@ Be sure that you add the property to the `Entities/User.php` file:
 Now if you run the diff task you will get a nicely generated migration with the
 changes required to update your database!
 
+.. code-block:: bash
+
     $ ./doctrine migrations:diff
     Generated new migration class to "/path/to/migrations/DoctrineMigrations/Version20100416130459.php" from schema differences.
 
 The migration class that is generated contains the SQL statements required to 
 update your database:
 
-    [php]
+.. code-block:: php
+
     namespace DoctrineMigrations;
 
     use Doctrine\DBAL\Migrations\AbstractMigration,

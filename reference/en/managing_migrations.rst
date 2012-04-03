@@ -1,5 +1,13 @@
+.. index::
+   single: ManagingMigrations
+
+Managing Migrations
+===================
+
 Now that we have a new migration class present, lets run the status task to see
 if it is there:
+
+.. code-block:: bash
 
     $ ./doctrine migrations:status
 
@@ -26,7 +34,8 @@ As you can see we have a new version present and it is ready to be executed. The
 problem is it does not have anything in it so nothing would be executed! Let's
 add some code to it and add a new table:
 
-    [php]
+.. code-block:: php
+
     namespace DoctrineMigrations;
 
     use Doctrine\DBAL\Migrations\AbstractMigration,
@@ -50,6 +59,8 @@ add some code to it and add a new table:
 Now we are ready to give it a test! First lets just do a dry-run to make sure
 it produces the SQL we expect:
 
+.. code-block:: bash
+
     $ ./doctrine migrations:migrate --dry-run
     Are you sure you wish to continue?
     y
@@ -59,8 +70,10 @@ it produces the SQL we expect:
 
          -> CREATE TABLE users (username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL) ENGINE = InnoDB
 
-Everything looks good so we can remove the _--dry-run_ option and actually execute
+Everything looks good so we can remove the *--dry-run* option and actually execute
 the migration:
+
+.. code-block:: bash
 
     $ ./doctrine migrations:migrate
     Are you sure you wish to continue?
@@ -74,6 +87,8 @@ the migration:
       >> migrated
 
 By checking the status again you will see everything is updated:
+
+.. code-block:: bash
 
     $ ./doctrine migrations:status
 
@@ -96,13 +111,16 @@ By checking the status again you will see everything is updated:
 
         >> 2010-04-16 13:04:01 (20100416130452)                migrated
 
-++ Reverting Migrations
+Reverting Migrations
+--------------------
 
-You maybe noticed in the last example that we defined a _down()_ method which
+You maybe noticed in the last example that we defined a *down()* method which
 drops the users table that we created. This method allows us to easily revert
-changes the schema has been migrated to. The _migrate_ command takes a _version_
+changes the schema has been migrated to. The *migrate* command takes a *version*
 argument which you can use to roll back your schema to a specific version of
 your migrations:
+
+.. code-block:: bash
 
     $ ./doctrine migrations:migrate 0
     Are you sure you wish to continue?
@@ -123,6 +141,8 @@ your migrations:
 
 Now our database is back to where we originally started. Give it a check with
 the status command:
+
+.. code-block:: bash
 
     $ ./doctrine migrations:status
 
@@ -146,11 +166,14 @@ the status command:
         >> 2010-04-16 13:04:01 (20100416130401)                not migrated
         >> 2010-04-16 13:04:22 (20100416130422)                not migrated
 
-++ Writing Migration SQL Files
+Writing Migration SQL Files
+---------------------------
 
 You can optionally choose to not execute a migration directly on a database and
 instead output all the SQL statements to a file. This is possible by using the
-_--write-sql_ option of the _migrate_ command:
+*--write-sql* option of the *migrate* command:
+
+.. code-block:: bash
 
     $ ./doctrine migrations:migrate --write-sql
     Executing dry run of migration up to 20100416130422 from 0
@@ -165,10 +188,11 @@ _--write-sql_ option of the _migrate_ command:
 
     Writing migration file to "/path/to/sandbox/doctrine_migration_20100416130405.sql"
 
-Now if you have a look at the _doctrine_migration_20100416130405.sql_ file you will see the would be
+Now if you have a look at the *doctrine_migration_20100416130405.sql* file you will see the would be
 executed SQL outputted in a nice format:
 
-    [sql]
+.. code-block:: bash
+
     # Doctrine Migration File Generated on 2010-04-16 13:04:05
     # Migrating from 0 to 20100416130422
 
@@ -178,15 +202,20 @@ executed SQL outputted in a nice format:
     # Version 20100416130422
     CREATE TABLE addresses (id INT NOT NULL, street VARCHAR(255) NOT NULL, PRIMARY KEY(id)) ENGINE = InnoDB;
 
-++ Managing the Version Table
+Managing the Version Table
+--------------------------
 
 Sometimes you may need to manually change something in the database table which
 manages the versions for some migrations. For this you can use the version task.
 You can easily add a version like this:
 
+.. code-block:: bash
+
     $ ./doctrine migrations:version YYYYMMDDHHMMSS --add
 
 Or you can delete that version:
+
+.. code-block:: bash
 
     $ ./doctrine migrations:version YYYYMMDDHHMMSS --delete
 
