@@ -1,5 +1,5 @@
 .. index::
-   single: ManagingMigrations
+   single: Managing Migrations
 
 Managing Migrations
 ===================

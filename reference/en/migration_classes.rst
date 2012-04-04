@@ -1,5 +1,5 @@
 .. index::
-   single: MigrationClasses
+   single: Migration Classes
 
 Migration Classes
 =================

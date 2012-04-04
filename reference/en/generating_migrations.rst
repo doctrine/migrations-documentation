@@ -1,5 +1,5 @@
 .. index::
-   single: GeneratingMigrations
+   single: Generating Migrations
 
 Generating Migrations
 =====================
