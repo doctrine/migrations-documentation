@@ -1,6 +1,14 @@
+.. index::
+   single: Migration Classes
+
+Migration Classes
+=================
+
 As now everything is setup and configured you are ready to start writing
 migration classes. You can easily generate your first migration class with the
 following command:
+
+.. code-block:: bash
 
     $ ./doctrine migrations:generate
     Generated new migration class to "/path/to/migrations/classes/DoctrineMigrations/Version20100416130401.php"
@@ -8,7 +16,8 @@ following command:
 Have a look and you will see a new class at the above location that looks like
 the following:
 
-    [php]
+.. code-block:: php
+
     namespace DoctrineMigrations;
 
     use Doctrine\DBAL\Migrations\AbstractMigration,
@@ -28,10 +37,12 @@ the following:
     }
 
 Sometimes you need to do some complex migration operations which force you
-to use plain SQL statements. Using the __addSql()_ method this is possible within any
+to use plain SQL statements. Using the *addSql()* method this is possible within any
 migration class.
 
 First you need to generate a new migration class:
+
+.. code-block:: bash
 
     $ ./doctrine migrations:generate
     Generated new migration class to "/path/to/migrations/DoctrineMigrations/Version20100416130422.php"
@@ -39,7 +50,8 @@ First you need to generate a new migration class:
 This newly generated migration class is the place where you can add your own
 custom SQL queries:
 
-    [php]
+.. code-block:: php
+
     namespace DoctrineMigrations;
 
     use Doctrine\DBAL\Migrations\AbstractMigration,
