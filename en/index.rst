@@ -1,10 +1,13 @@
-Migrations Documentation
-========================
+Welcome to Doctrine 2 Migrations documentation!
+===============================================
 
-.. toctree::
-    :hidden:
+Here is the :doc:`table of contents <toc>`.
 
-    introduction
-    migration_classes
-    managing_migrations
-    generating_migrations
+Getting Started
+---------------
+
+* **Reference**:
+  :doc:`Introduction <reference/introduction>` |
+  :doc:`Migration Classes <reference/migration_classes>` |
+  :doc:`Managing Migrations <reference/managing_migrations>` |
+  :doc:`Generating Migrations <reference/generating_migrations>`
