@@ -45,7 +45,7 @@ Register Console Commands
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now that we have setup the autoloaders we are ready to add the migration console
-commands to our Doctrine Command Line Interface:
+commands to our `Doctrine Command Line Interface <http://doctrine-orm.readthedocs.org/en/latest/reference/tools.html#adding-own-commands>`_:
 
 .. code-block:: php
 
