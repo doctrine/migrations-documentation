@@ -112,7 +112,7 @@ file with all the required dependencies. You can drop that single file onto any 
 and start using the Doctrine Migrations.
 
 To register a system command for the migrations you can create a simple batch
-script, for example on a *nix Enviroment creating a `/usr/local/bin/doctrine-migrations`:
+script, for example on a \*nix Environment creating a `/usr/local/bin/doctrine-migrations`:
 
 .. code-block:: bash
 
