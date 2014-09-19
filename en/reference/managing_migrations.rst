@@ -89,9 +89,6 @@ the migration:
 Alternately, if you wish to run the migrations in an unatended mode, we can add the *--no--interaction* option and then
 execute the migrations without any extra prompting from Doctrine.
 
-Everything looks good so we can remove the *--dry-run* option and actually execute
-the migration:
-
 .. code-block:: bash
 
     $ ./doctrine migrations:migrate --no-interaction
