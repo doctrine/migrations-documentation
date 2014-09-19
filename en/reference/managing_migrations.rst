@@ -86,7 +86,24 @@ the migration:
 
       >> migrated
 
-By checking the status again you will see everything is updated:
+Alternately, if you wish to run the migrations in an unatended mode, we can add the *--no--interaction* option and then
+execute the migrations without any extra prompting from Doctrine.
+
+Everything looks good so we can remove the *--dry-run* option and actually execute
+the migration:
+
+.. code-block:: bash
+
+    $ ./doctrine migrations:migrate --no-interaction
+    Migrating up to 20100416130452 from 0
+
+      >> migrating 20100416130452
+
+         -> CREATE TABLE users (username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL) ENGINE = InnoDB
+
+      >> migrated
+
+By checking the status again after using either method you will see everything is updated:
 
 .. code-block:: bash
 
