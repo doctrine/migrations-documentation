@@ -74,3 +74,23 @@ The SQL generated here is the exact same SQL that would be executed if you were
 using the `orm:schema-tool` task and the `--update` option. This just allows you to
 capture that SQL and maybe tweak it or add to it and trigger the deployment
 later across multiple database servers.
+
+Ignoring custom Tables
+======================
+
+If you have custom tables which are not managed by doctrine you might face the situation
+that with every diff task you are executing you get the remove statements for those tables
+added to the migration class.
+
+Therefore you can configure doctrine with a schema filter.
+
+    $connection->getConfiguration()->setFilterSchemaAssetsExpression("~^(?!t_)~");
+    
+With this expression all tables prefixed with t_ will ignored by the schema tool.
+
+If you use the DoctrineBundle with Symfony2 you can set the schema_filter option
+in your configuration. You can find more information in the documentation of the
+DoctrineMigationsBundle.
+
+
+
