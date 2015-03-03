@@ -10,4 +10,5 @@ Getting Started
   :doc:`Introduction <reference/introduction>` |
   :doc:`Migration Classes <reference/migration_classes>` |
   :doc:`Managing Migrations <reference/managing_migrations>` |
-  :doc:`Generating Migrations <reference/generating_migrations>`
+  :doc:`Generating Migrations <reference/generating_migrations>` |
+  :doc:`Custom configuration <reference/custome_configuration>`
