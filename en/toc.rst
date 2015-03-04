@@ -13,3 +13,4 @@ Reference Guide
    reference/managing_migrations
    reference/generating_migrations
    reference/custom_configuration
+   reference/input_output_customization

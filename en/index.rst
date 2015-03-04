@@ -11,5 +11,5 @@ Getting Started
   :doc:`Migration Classes <reference/migration_classes>` |
   :doc:`Managing Migrations <reference/managing_migrations>` |
   :doc:`Generating Migrations <reference/generating_migrations>` |
-  :doc:`Custom configuration <reference/custom_configuration>`
-
+  :doc:`Custom Configuration <reference/custom_configuration>` |
+  :doc:`Input - Output Customization <reference/input_output_customization>`
