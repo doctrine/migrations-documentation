@@ -12,3 +12,4 @@ Reference Guide
    reference/migration_classes
    reference/managing_migrations
    reference/generating_migrations
+   reference/custom_configuration
