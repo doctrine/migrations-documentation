@@ -4,6 +4,12 @@
 Generating Migrations
 =====================
 
+Migrations can be created for you if you're using the Doctrine 2 ORM or the DBAL
+`Schema Representation <http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/schema-representation.html>`_.
+
+Using the ORM
+-------------
+
 If you are using the Doctrine 2 ORM you can easily generate a migration class
 by modifying your mapping information and running the diff task to compare it
 to your current database schema.
@@ -75,6 +81,88 @@ using the `orm:schema-tool` task and the `--update` option. This just allows you
 capture that SQL and maybe tweak it or add to it and trigger the deployment
 later across multiple database servers.
 
+Without the ORM
+---------------
+
+Internally the diff command generates a ``Doctrine\DBAL\Schema\Schema`` object
+from your entity's metadata using an implementation of
+``Doctrine\DBAL\Migrations\Provider\SchemaProvider``. To use the Schema representation
+directly, without the ORM, you must implement this interface yourself.
+
+.. code-block:: php
+
+    <?php
+
+    use Doctrine\DBAL\Schema\Schema;
+    use Doctrine\DBAL\Migrations\Provider\SchemaProvider;
+
+    final class CustomSchemaProvider implements SchemaProvider
+    {
+        /**
+         * The schema provider only has one method: `createSchema`. This should
+         * return an Schema object that represents the state to which you'd like
+         * to migrate your database.
+         * {@inheritdoc}
+         */
+        public function createSchema()
+        {
+            $schema = new Schema();
+
+            $table = $schema->createTable('foo');
+            $table->addColumn('id', 'integer', array(
+                'autoincrement' => true,
+            ));
+            $table->setPrimaryKey(array('id'));
+
+            return $schema;
+        }
+    }
+
+The ``StubSchemaProvider`` provided with the migrations library is another option.
+It simply takes a schema object to its constructor and returns it from ``createSchema``.
+
+.. code-block:: php
+
+    <?php
+
+    use Doctrine\DBAL\Schema\Schema;
+    use Doctrine\DBAL\Migrations\Provider\StubSchemaProvider;
+
+    $schema = new Schema();
+
+    $table = $schema->createTable('foo');
+    $table->addColumn('id', 'integer', array(
+        'autoincrement' => true,
+    ));
+    $table->setPrimaryKey(array('id'));
+
+    $provider = new StubSchemaProvider($schema);
+    $provider->createSchema() === $schema; // true
+
+By default the ``doctrine-migrations`` command line tool will only add the diff
+command if the ORM is present. Without the ORM, you'll have to add the diff command
+to your `console application <http://symfony.com/doc/current/components/console/introduction.html>`_
+manually, passing in your schema provider implementation to the diff command's constructor.
+
+.. code-block:: php
+
+    <?php
+
+    use Doctrine\DBAL\Migrations\Tools\Console\Command\DiffCommand;
+
+    $schemaProvider = new CustomSchemaProvider();
+
+    /** @var Symfony\Component\Console\Application */
+    $app->add(new DiffCommand($schemaProvider));
+
+    // ...
+
+    $app->run();
+
+With the custom provider in place the diff command will compare the current database
+state to the one provided. If there's a mismatch, the differences will be put
+into the generated migration just like the ORM examples above.
+
 Ignoring custom Tables
 ======================
 
@@ -91,6 +179,3 @@ With this expression all tables prefixed with t_ will ignored by the schema tool
 If you use the DoctrineBundle with Symfony2 you can set the schema_filter option
 in your configuration. You can find more information in the documentation of the
 DoctrineMigationsBundle.
-
-
-
