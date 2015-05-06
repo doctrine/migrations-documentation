@@ -170,6 +170,22 @@ Of course you could do the same thing with a *configuration.yml* file:
     table_name: doctrine_migration_versions
     migrations_directory: /path/to/migrations/classes/DoctrineMigrations
 
+With the above example, the migrations tool will search the ``migrations_directory``
+recursively for files that begin with ``Version`` followed one to 255 characters
+and a ``.php`` suffix. ``Version.{1,255}\.php`` is the regular expression that's
+used.
+
+Everything after ``Version`` will be treated as the actual version in
+the database. Take the file name ``VersionSomeVersion.php``, ``SomeVersion`` would
+be the version *number* stored in the migrations database table. Since versions
+are ordered, doctrine :doc:`generates </reference/generating_migrations>` version
+numbers with a date time like ``Version20150505120000.php``. This ensures that
+the migrations are executed in the correct order.
+
+While you *can* use custom filenames, it's probably a good idea to the Doctrine
+:doc:`generate migration files </reference/generating_migrations>` for you.
+
+
 And if you want to specify each migration manually in YAML you can:
 
 .. code-block:: yaml
