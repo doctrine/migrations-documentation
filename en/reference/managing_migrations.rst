@@ -136,7 +136,7 @@ your migrations:
 
 .. code-block:: bash
 
-    $ ./doctrine migrations:migrate 0
+    $ ./doctrine migrations:migrate first
     Are you sure you wish to continue?
     y
     Migrating down to 0 from 20100416130422
