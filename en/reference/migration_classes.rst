@@ -40,6 +40,26 @@ the following:
 
 You can now use the *addSql()* method within the up and down method.
 
+Internally the addSql call are passed to the `dbal executeQuery method`_.
+This means that you can use the power of the prepared statement easilly and that you don't need to copy paste the same
+query with different parameters. You can just pass those differents parameters to the addSql method as parameters.
+
+.. code-block:: php
+
+        public function up(Schema $schema)
+        {
+            $users = array(
+                    array('name' => 'mike', 'id' => 1),
+                    array('name' => 'jwage', 'id' => 2),
+                    array('name' => 'ocramius', 'id' => 3),
+                    );
+            foreach ($users as $user) {
+                $this->addSql('UPDATE user SET happy = true WHERE name = :name AND id = :id', $user);
+            }
+        }
+
+For more infos on `how the doctrine dbal executeQuery method works go tho the doctrine dbal documentation`_.
+
 Additionally, there is also the preUp, postUp and preDown, postDown method, that are respectivelly called before and
  after the up and down method are called.
 
@@ -82,5 +102,8 @@ The only justification I can see to use it is if you have a project that need to
 accepting that you won't be able to use any vendor specific feature of those databases.
 And I still think that you will encounter less issue if you have one migration code base for each vendor.
 
+
+.. _dbal executeQuery method: http://doctrine-dbal.readthedocs.org/en/latest/reference/data-retrieval-and-manipulation.html#executequery
+.. _how the doctrine dbal executeQuery method works go tho the doctrine dbal documentation: http://doctrine-dbal.readthedocs.org/en/latest/reference/data-retrieval-and-manipulation.html#list-of-parameters-conversion
 .. _documentation on how to use the Schema object: http://doctrine-dbal.readthedocs.org/en/latest/reference/schema-representation.html
 .. _documentation on what you can query with it: http://doctrine-dbal.readthedocs.org/en/latest/reference/schema-manager.html
