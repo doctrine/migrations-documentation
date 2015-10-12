@@ -36,9 +36,12 @@ the following:
         }
     }
 
-Sometimes you need to do some complex migration operations which force you
-to use plain SQL statements. Using the *addSql()* method this is possible within any
-migration class.
+
+
+You can now use the *addSql()* method within the up and down method.
+
+Additionally, there is also the preUp, postUp and preDown, postDown method, that are respectivelly called before and
+ after the up and down method are called.
 
 First you need to generate a new migration class:
 
