@@ -180,6 +180,17 @@ the status command:
         >> 2010-04-16 13:04:01 (20100416130401)                not migrated
         >> 2010-04-16 13:04:22 (20100416130422)                not migrated
 
+Aliases
+-------
+
+There are some shortcut for convenience (first, prev, next, latest).
+So that you don't have to know the name of the migration.
+You can just call
+
+.. code-block:: bash
+
+    $ ./doctrine migrations:migrate prev
+
 Writing Migration SQL Files
 ---------------------------
 
