@@ -69,3 +69,38 @@ custom SQL queries:
             $this->addSql('DROP TABLE addresses');
         }
     }
+
+Additionally, ``addSql()`` can take parameters and types as its second and third
+arguments. For instance, you might want to bind values to to named (or question
+mark) SQL parameters.
+
+.. code-block:: php
+
+    namespace DoctrineMigrations;
+
+    namespace DoctrineMigrations;
+
+    use Doctrine\DBAL\Migrations\AbstractMigration,
+        Doctrine\DBAL\Schema\Schema;
+
+    class Version20160705000000 extends AbstractMigration
+    {
+        public function up(Schema $schema)
+        {
+            // ...
+            $this->addSql('INSERT INTO addresses (street) VALUES (:street)', [
+                'street' => '123 Example Lane',
+            ], [
+                'string' => 'string',
+            ]);
+        }
+
+        public function down(Schema $schema)
+        {
+            $this->addSql('DROP TABLE addresses');
+        }
+    }
+
+See the `Doctrine DBAL documentation <http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/data-retrieval-and-manipulation.html>`_
+for more information on binding types and more information about the placeholder
+syntax.
