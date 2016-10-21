@@ -182,7 +182,7 @@ are ordered, doctrine :doc:`generates </reference/generating_migrations>` versio
 numbers with a date time like ``Version20150505120000.php``. This ensures that
 the migrations are executed in the correct order.
 
-While you *can* use custom filenames, it's probably a good idea to the Doctrine
+While you *can* use custom filenames, it's probably a good idea to let Doctrine
 :doc:`generate migration files </reference/generating_migrations>` for you.
 
 
