@@ -92,18 +92,3 @@ custom SQL queries:
             $this->addSql('DROP TABLE addresses');
         }
     }
-
-
-As you can see, you get passed a Schema object that you can use to modify it.
-All the `documentation on how to use the Schema object`_ is in the doctrine documentation.
-As well as the `documentation on what you can query with it`_.
-Please note that it is not the recommended way of changing your schema.
-The only justification I can see to use it is if you have a project that need to support multiple database vendors and
-accepting that you won't be able to use any vendor specific feature of those databases.
-And I still think that you will encounter less issue if you have one migration code base for each vendor.
-
-
-.. _dbal executeQuery method: http://doctrine-dbal.readthedocs.org/en/latest/reference/data-retrieval-and-manipulation.html#executequery
-.. _how the doctrine dbal executeQuery method works go tho the doctrine dbal documentation: http://doctrine-dbal.readthedocs.org/en/latest/reference/data-retrieval-and-manipulation.html#list-of-parameters-conversion
-.. _documentation on how to use the Schema object: http://doctrine-dbal.readthedocs.org/en/latest/reference/schema-representation.html
-.. _documentation on what you can query with it: http://doctrine-dbal.readthedocs.org/en/latest/reference/schema-manager.html
