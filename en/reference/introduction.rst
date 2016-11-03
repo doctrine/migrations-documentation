@@ -75,7 +75,7 @@ Console HelperSet.
 
     $helperSet = new \Symfony\Component\Console\Helper\HelperSet(array(
         'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($db),
-        'dialog' => new \Symfony\Component\Console\Helper\DialogHelper(),
+        'dialog' => new \Symfony\Component\Console\Helper\QuestionHelper(),
     ));
 
 You will see that you have a few new commands when you execute the following command:
