@@ -14,7 +14,7 @@ the following:
 
 .. code-block:: php
 
-    use DoctrineMigrations\Configuration\Configuration;
+    use Doctrine\DBAL\Migrations\Configuration\Configuration;
 
     $configuration = new Configuration();
     $configuration->setMigrationsTableName(...);
