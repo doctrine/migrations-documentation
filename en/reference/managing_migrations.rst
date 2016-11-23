@@ -86,7 +86,7 @@ the migration:
 
       >> migrated
 
-Alternately, if you wish to run the migrations in an unatended mode, we can add the *--no--interaction* option and then
+Alternately, if you wish to run the migrations in an unattended mode, we can add the *--no--interaction* option and then
 execute the migrations without any extra prompting from Doctrine.
 
 .. code-block:: bash
