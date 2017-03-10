@@ -14,3 +14,4 @@ Reference Guide
    reference/generating_migrations
    reference/custom_configuration
    reference/input_output_customization
+   reference/events
