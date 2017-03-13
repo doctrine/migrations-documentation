@@ -12,4 +12,5 @@ Getting Started
   :doc:`Managing Migrations <reference/managing_migrations>` |
   :doc:`Generating Migrations <reference/generating_migrations>` |
   :doc:`Custom Configuration <reference/custom_configuration>` |
-  :doc:`Input - Output Customization <reference/input_output_customization>`
+  :doc:`Input - Output Customization <reference/input_output_customization>` |
+  :doc:`Events <reference/events>`
