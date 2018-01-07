@@ -6,6 +6,7 @@ Generating Migrations
 
 Migrations can be created for you if you're using the Doctrine 2 ORM or the DBAL
 `Schema Representation <http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/schema-representation.html>`_.
+Empty migration classes can also be created.
 
 Using the ORM
 -------------
@@ -163,8 +164,8 @@ With the custom provider in place the diff command will compare the current data
 state to the one provided. If there's a mismatch, the differences will be put
 into the generated migration just like the ORM examples above.
 
-Ignoring custom Tables
-======================
+Ignoring Custom Tables
+----------------------
 
 If you have custom tables which are not managed by doctrine you might face the situation
 that with every diff task you are executing you get the remove statements for those tables
@@ -179,3 +180,13 @@ With this expression all tables prefixed with t_ will ignored by the schema tool
 If you use the DoctrineBundle with Symfony2 you can set the schema_filter option
 in your configuration. You can find more information in the documentation of the
 DoctrineMigationsBundle.
+
+Creating Empty Migrations
+-------------------------
+
+Use the ``migrations:generate`` command to create an empty migration class.
+
+.. code-block:: bash
+
+    $ ./doctrine migrations:generate
+    Generated new migration class to /path/to/migrations/DoctrineMigrations/Version20180107080000.php
