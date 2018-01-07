@@ -227,6 +227,8 @@ executed SQL outputted in a nice format:
     # Version 20100416130422
     CREATE TABLE addresses (id INT NOT NULL, street VARCHAR(255) NOT NULL, PRIMARY KEY(id)) ENGINE = InnoDB;
 
+.. _managing-versions-table:
+
 Managing the Version Table
 --------------------------
 
