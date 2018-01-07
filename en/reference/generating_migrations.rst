@@ -8,6 +8,9 @@ Migrations can be created for you if you're using the Doctrine 2 ORM or the DBAL
 `Schema Representation <http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/schema-representation.html>`_.
 Empty migration classes can also be created.
 
+Favor the tools described here over manually created migration files as the library
+has some :doc:`requirements around migration version numbers <version_numbers>`.
+
 Using the ORM
 -------------
 
