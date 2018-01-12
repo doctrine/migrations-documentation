@@ -15,3 +15,4 @@ Reference Guide
    reference/custom_configuration
    reference/input_output_customization
    reference/events
+   reference/version_numbers
