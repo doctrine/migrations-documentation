@@ -88,6 +88,7 @@ pygments_style = 'sphinx'
 
 
 # -- Options for HTML output ---------------------------------------------------
+html_context = {'subproject': 'doctrine-migrations'}
 
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.
