@@ -4,7 +4,7 @@
 Input - Output Customization
 ============================
 
-Behind the scenes Doctrine Migration uses `\Symfony\Component\Console\Input\ArgvInput`
+Behind the scenes Doctrine Migration uses `\\Symfony\\Component\\Console\\Input\\ArgvInput`
 to capture and parse values from `$_SERVER['argv']`.
 
 You can customize the input like the following:
